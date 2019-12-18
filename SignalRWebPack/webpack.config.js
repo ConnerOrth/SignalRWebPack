@@ -2,6 +2,7 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     entry: "./src/index.ts",
@@ -32,6 +33,12 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             filename: "css/[name].[chunkhash].css"
-        })
+        }),
+        new CopyWebpackPlugin(
+            [{
+                from: 'src/js/CW-ChatBot-SignalRChatBot.js',
+                to: '',
+                force: true
+            }])
     ]
 };

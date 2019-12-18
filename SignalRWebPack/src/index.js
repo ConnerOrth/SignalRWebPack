@@ -1,29 +1,27 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-require("./css/main.css");
-var signalR = require("@microsoft/signalr");
-var divMessages = document.querySelector("#divMessages");
-var tbMessage = document.querySelector("#tbMessage");
-var btnSend = document.querySelector("#btnSend");
-var username = new Date().getTime();
-var connection = new signalR.HubConnectionBuilder()
-    .withUrl("/hub")
-    .build();
-connection.on("messageReceived", function (username, message) {
-    var messageContainer = document.createElement("div");
-    messageContainer.innerHTML =
-        "<div class=\"message-author\">" + username + "</div><div>" + message + "</div>";
-    divMessages.appendChild(messageContainer);
-    divMessages.scrollTop = divMessages.scrollHeight;
-});
-connection.start().catch(function (err) { return document.write(err); });
-tbMessage.addEventListener("keyup", function (e) {
-    if (e.keyCode === 13) {
-        send();
-    }
-});
-btnSend.addEventListener("click", send);
-function send() {
-    connection.send("newMessage", username, tbMessage.value)
-        .then(function () { return tbMessage.value = ""; });
-}
+//import "./css/main.css";
+//import * as signalR from "@microsoft/signalr";
+//const divMessages: HTMLDivElement = document.querySelector("#divMessages");
+//const tbMessage: HTMLInputElement = document.querySelector("#tbMessage");
+//const btnSend: HTMLButtonElement = document.querySelector("#btnSend");
+//const username = new Date().getTime();
+//const connection = new signalR.HubConnectionBuilder()
+//    .withUrl("/hub")
+//    .build();
+//connection.on("messageReceived", (username: string, message: string) => {
+//    let messageContainer = document.createElement("div");
+//    messageContainer.innerHTML =
+//        `<div class="message-author">${username}</div><div>${message}</div>`;
+//    divMessages.appendChild(messageContainer);
+//    divMessages.scrollTop = divMessages.scrollHeight;
+//});
+//connection.start().catch(err => document.write(err));
+//tbMessage.addEventListener("keyup", (e: KeyboardEvent) => {
+//    if (e.keyCode === 13) {
+//        send();
+//    }
+//});
+//btnSend.addEventListener("click", send);
+//function send() {
+//    connection.send("newMessage", username, tbMessage.value)
+//        .then(() => tbMessage.value = "");
+//}
